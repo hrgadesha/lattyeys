@@ -1,0 +1,29 @@
+{
+ "creation": "2020-08-25 13:19:30.133972",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "mode_of_transport_covered"
+ ],
+ "fields": [
+  {
+   "fieldname": "mode_of_transport_covered",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Mode of transport covered",
+   "options": "\n2 wheeler\n3 wheeler\nTempo\nMini Van\nMini Truck\nTruck\nHeavy Duty Truck\nRailway\nBy Ship\nBy Air"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-08-25 14:18:29.567678",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Mode of Transport",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

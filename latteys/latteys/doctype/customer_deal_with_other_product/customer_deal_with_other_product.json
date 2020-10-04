@@ -1,0 +1,55 @@
+{
+ "creation": "2020-08-24 19:07:35.046517",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "industry_segment",
+  "competitor_company",
+  "product_sold",
+  "estimate_annual_sales"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "industry_segment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Industry Segment",
+   "options": "Industry Type"
+  },
+  {
+   "columns": 2,
+   "fieldname": "competitor_company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Competitor Company",
+   "options": "Competitor Company"
+  },
+  {
+   "fieldname": "product_sold",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product Sold",
+   "options": "Product Sold By Customer"
+  },
+  {
+   "columns": 2,
+   "fieldname": "estimate_annual_sales",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Est Annual Sales (Lacks)"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-08-25 13:26:55.712287",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Customer Deal With Other Product",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

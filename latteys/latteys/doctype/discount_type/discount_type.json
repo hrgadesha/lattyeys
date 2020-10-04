@@ -1,0 +1,40 @@
+{
+ "autoname": "field:discount_name",
+ "creation": "2020-09-28 12:01:39.430267",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "discount_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "discount_name",
+   "fieldtype": "Data",
+   "label": "Discount Name",
+   "unique": 1
+  }
+ ],
+ "modified": "2020-09-28 12:01:45.810127",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Discount Type",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

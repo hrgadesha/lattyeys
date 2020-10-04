@@ -1,0 +1,35 @@
+{
+ "creation": "2020-08-13 23:09:01.097558",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "head",
+  "discharge"
+ ],
+ "fields": [
+  {
+   "fieldname": "head",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Head"
+  },
+  {
+   "fieldname": "discharge",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Discharge"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-08-13 23:09:01.097558",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Item Performance Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
