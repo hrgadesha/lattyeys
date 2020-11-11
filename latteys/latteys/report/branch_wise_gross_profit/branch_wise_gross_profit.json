@@ -1,0 +1,26 @@
+{
+ "add_total_row": 0,
+ "creation": "2020-10-22 18:53:23.933131",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "[\n{\"label\":\"Sales Invoice\",\"fieldname\":\"Sales Invoice\",\"fieldtype\":\"Link\",\"width\":120,\"options\":\"Sales Invoice\",\"id\":\"Sales Invoice\",\"name\":\"Sales Invoice\",\"editable\":false,\"compareValue\":null},\n{\"fieldname\":\"branch\",\"fieldtype\":\"Link\",\"label\":\"Branch\",\"insert_after_index\":0,\"link_field\":\"Customer\",\"doctype\":\"Customer\",\"options\":\"Branch\",\"width\":100,\"id\":\"branch\",\"name\":\"Branch\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Customer\",\"fieldname\":\"Customer\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Customer\",\"id\":\"Customer\",\"name\":\"Customer\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Customer Group\",\"fieldname\":\"Customer Group\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Customer Group\",\"id\":\"Customer Group\",\"name\":\"Customer Group\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Posting Date\",\"fieldname\":\"Posting Date\",\"fieldtype\":\"Date\",\"width\":100,\"id\":\"Posting Date\",\"name\":\"Posting Date\",\"editable\":false},\n{\"label\":\"Item Code\",\"fieldname\":\"Item Code\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Item\",\"id\":\"Item Code\",\"name\":\"Item Code\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Item Name\",\"fieldname\":\"Item Name\",\"fieldtype\":\"Data\",\"width\":100,\"id\":\"Item Name\",\"name\":\"Item Name\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Item Group\",\"fieldname\":\"Item Group\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Item Group\",\"id\":\"Item Group\",\"name\":\"Item Group\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Brand\",\"fieldname\":\"Brand\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Brand\",\"id\":\"Brand\",\"name\":\"Brand\",\"editable\":false,\"compareValue\":null},{\"label\":\"Description\",\"fieldname\":\"Description\",\"fieldtype\":\"Data\",\"width\":100,\"id\":\"Description\",\"name\":\"Description\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Warehouse\",\"fieldname\":\"Warehouse\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Warehouse\",\"id\":\"Warehouse\",\"name\":\"Warehouse\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Qty\",\"fieldname\":\"Qty\",\"fieldtype\":\"Float\",\"width\":80,\"id\":\"Qty\",\"name\":\"Qty\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Avg. Selling Rate\",\"fieldname\":\"Avg. Selling Rate\",\"fieldtype\":\"Currency\",\"width\":100,\"options\":\"currency\",\"id\":\"Avg. Selling Rate\",\"name\":\"Avg. Selling Rate\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Valuation Rate\",\"fieldname\":\"Valuation Rate\",\"fieldtype\":\"Currency\",\"width\":100,\"options\":\"currency\",\"id\":\"Valuation Rate\",\"name\":\"Valuation Rate\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Selling Amount\",\"fieldname\":\"Selling Amount\",\"fieldtype\":\"Currency\",\"width\":100,\"options\":\"currency\",\"id\":\"Selling Amount\",\"name\":\"Selling Amount\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Buying Amount\",\"fieldname\":\"Buying Amount\",\"fieldtype\":\"Currency\",\"width\":100,\"options\":\"currency\",\"id\":\"Buying Amount\",\"name\":\"Buying Amount\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Gross Profit\",\"fieldname\":\"Gross Profit\",\"fieldtype\":\"Currency\",\"width\":100,\"options\":\"currency\",\"id\":\"Gross Profit\",\"name\":\"Gross Profit\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Gross Profit %\",\"fieldname\":\"Gross Profit %\",\"fieldtype\":\"Percent\",\"width\":100,\"id\":\"Gross Profit %\",\"name\":\"Gross Profit %\",\"editable\":false,\"compareValue\":null},\n{\"label\":\"Project\",\"fieldname\":\"Project\",\"fieldtype\":\"Link\",\"width\":100,\"options\":\"Project\",\"id\":\"Project\",\"name\":\"Project\",\"editable\":false,\"compareValue\":null}\n]",
+ "modified": "2020-10-25 16:32:15.901045",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Branch Wise Gross Profit",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Sales Invoice",
+ "reference_report": "Gross Profit",
+ "report_name": "Branch Wise Gross Profit",
+ "report_type": "Custom Report",
+ "roles": [
+  {
+   "role": "Branch Account Rights"
+  }
+ ]
+}

@@ -117,7 +117,7 @@ def attach_all_docs(document):
 	items = []
 	for item in document["items"]:
 		#frappe.msgprint(str(item))
-		if item["send_drawing"]:
+		if item.send_drawing:
 			items.append(item["item_code"])
 
 	count = 0

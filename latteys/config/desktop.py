@@ -7,7 +7,7 @@ def get_data():
 		{
 			"module_name": "Latteys",
 			"color": "grey",
-			"icon": "octicon octicon-file-directory",
+			"icon": "icon manufacture-blue",
 			"type": "module",
 			"label": _("Latteys")
 		}

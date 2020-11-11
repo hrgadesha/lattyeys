@@ -1,0 +1,36 @@
+{
+ "creation": "2020-11-02 18:19:12.390311",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "branch",
+  "item_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-11-02 18:19:15.127156",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Branch Wise Item Name",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

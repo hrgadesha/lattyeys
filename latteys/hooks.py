@@ -6,7 +6,7 @@ app_name = "latteys"
 app_title = "Latteys"
 app_publisher = "B2Grow"
 app_description = "Customisation"
-app_icon = "octicon octicon-file-directory"
+app_icon = "icon manufacture-blue"
 app_color = "grey"
 app_email = "mail@b2grow.com"
 app_license = "MIT"
@@ -85,12 +85,24 @@ doc_events = {
 	},
         "Sales Invoice": {
                 "on_submit": "latteys.latteys.doctype.replaced_qty.transferStock"
+        },
+	"Event": {
+                "validate": "latteys.latteys.doctype.auto_mail.sendMail"
         }
 #,
 #	"Project": {
 #		"autoname": "latteys.latteys.doctype.replaced_qty.addPerm",
 #               "validate": "latteys.latteys.doctype.replaced_qty.addPerm_validate"
 #        }
+}
+
+scheduler_events = {
+	"cron": {
+		"*/5 * * * *":[
+			"latteys.latteys.doctype.replaced_qty.updateSerialNO"
+		]
+	}
+
 }
 
 # Scheduled Tasks
@@ -133,3 +145,4 @@ doc_events = {
 # 	"Task": "latteys.task.get_dashboard_data"
 # }
 
+fixtures = ["Custom Field","Role","Property Setter"]
