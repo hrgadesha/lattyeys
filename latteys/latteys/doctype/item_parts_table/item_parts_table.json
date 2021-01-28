@@ -1,0 +1,80 @@
+{
+ "creation": "2020-12-16 16:57:37.980141",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "spare_parts",
+  "spare_part_name",
+  "customer_spare_part_name",
+  "issue",
+  "new_spare_parts",
+  "new_spare_parts_name",
+  "customer_new_spare_part_name",
+  "uom"
+ ],
+ "fields": [
+  {
+   "fieldname": "spare_parts",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Spare Parts",
+   "options": "Item"
+  },
+  {
+   "fieldname": "new_spare_parts",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "New Spare Parts",
+   "options": "Item"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "fetch_from": "spare_parts.item_name",
+   "fieldname": "spare_part_name",
+   "fieldtype": "Data",
+   "label": "Spare Part Name"
+  },
+  {
+   "fetch_from": "new_spare_parts.item_name",
+   "fieldname": "new_spare_parts_name",
+   "fieldtype": "Data",
+   "label": "New Spare Parts Name"
+  },
+  {
+   "fieldname": "issue",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Issue",
+   "options": "Damage\nMissing"
+  },
+  {
+   "fieldname": "customer_spare_part_name",
+   "fieldtype": "Data",
+   "label": "Customer Spare Part Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_new_spare_part_name",
+   "fieldtype": "Data",
+   "label": "Customer New Spare Part Name",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-12-24 12:50:44.549879",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Item Parts Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

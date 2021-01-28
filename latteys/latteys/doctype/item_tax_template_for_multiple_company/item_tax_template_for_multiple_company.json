@@ -1,0 +1,48 @@
+{
+ "allow_rename": 1,
+ "autoname": "field:template_name",
+ "creation": "2020-12-04 13:40:38.322208",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "template_name",
+  "item_tax"
+ ],
+ "fields": [
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "label": "Template Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "item_tax",
+   "fieldtype": "Table",
+   "label": "Item Tax",
+   "options": "Item Tax"
+  }
+ ],
+ "modified": "2020-12-04 14:08:14.631061",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Item Tax Template For Multiple Company",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

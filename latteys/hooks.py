@@ -80,14 +80,32 @@ app_license = "MIT"
 # Hook on document methods and events
 
 doc_events = {
- 	"Stock Entry": {
- 		"on_submit": "latteys.latteys.doctype.replaced_qty.updateSE"
-	},
+# 	"Stock Entry": {
+ #		"on_submit": "latteys.latteys.doctype.replaced_qty.updateSE"
+#	},
         "Sales Invoice": {
-                "on_submit": "latteys.latteys.doctype.replaced_qty.transferStock"
+                "on_submit": "latteys.latteys.doctype.replaced_qty.insertPI"
         },
 	"Event": {
                 "validate": "latteys.latteys.doctype.auto_mail.sendMail"
+        },
+	"Purchase Order": {
+                "on_submit": "latteys.latteys.doctype.replaced_qty.insertSO"
+        },
+	"Purchase Receipt": {
+                "on_submit": "latteys.latteys.doctype.replaced_qty.insertDN"
+        },
+	"Customer": {
+                "validate": "latteys.latteys.doctype.replaced_qty.createSupplier"
+        },
+	"Supplier": {
+                "validate": "latteys.latteys.doctype.replaced_qty.createCustomer"
+        },
+	"Item Group": {
+                "validate": "latteys.latteys.doctype.replaced_qty.createPIG"
+        },
+	"Purchase Invoice": {
+                "on_submit": "latteys.latteys.doctype.replaced_qty.insertPrice",
         }
 #,
 #	"Project": {
@@ -96,14 +114,14 @@ doc_events = {
 #        }
 }
 
-scheduler_events = {
+"""scheduler_events = {
 	"cron": {
 		"*/5 * * * *":[
 			"latteys.latteys.doctype.replaced_qty.updateSerialNO"
 		]
 	}
 
-}
+}"""
 
 # Scheduled Tasks
 # ---------------

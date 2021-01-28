@@ -1,5 +1,8 @@
 from __future__ import unicode_literals
 import frappe
+import datetime
+from datetime import datetime, timedelta
+from datetime import date
 from frappe import msgprint
 from frappe.utils.file_manager import save_url, save_file, get_file_name, remove_all, remove_file
 import json
@@ -76,7 +79,7 @@ def createTask(name):
 			mt = frappe.get_doc({
 			"doctype": "Task",
 			"branch" : proj.branch,
-			"subject": d.reference_name +" / "+ d.subject,
+			"subject": d.task_type +" - "+ d.reference_type +" - "+ d.reference_name,
 			"reference_type": d.reference_type,
 			"reference_name": d.reference_name,
 			"exp_start_date": d.start_date,
@@ -139,3 +142,295 @@ def attach_all_docs(document):
 				myFile.save()
 				current_attachments.append(attach)
 	frappe.msgprint("Attached {0} files".format(count))
+
+@frappe.whitelist()
+def insertSO(doc,method):
+	if doc.is_branch_transfer:
+		warehouse = frappe.db.sql("""select name from `tabWarehouse` where company = '{0}' and warehouse_name LIKE '%Fresh%'
+				;""".format(doc.supplier),as_list=1)
+
+		items = []
+		for i in doc.items:
+			item_li = {
+				"item_code": i.item_code,
+				"item_name": i.item_name,
+				"description": i.item_name,
+				"delivery_size": i.delivery_size,
+				"cable_size": i.cable_size,
+				"cable_length": i.cable_length,
+				"voltage_range": i.voltage_range,
+				"connection_type": i.connection_type,
+				"qty": i.qty,
+				"uom": i.uom,
+				"rate": i.rate,
+				"item_tax_template":i.item_tax_template.replace(doc.branch,doc.abbr)}
+			items.append(item_li)
+		taxes = []
+		for d in doc.taxes:
+			tax_li = {"charge_type": d.charge_type,"description":d.account_head.replace(doc.branch,doc.abbr),"rate": d.rate,"tax_amount": d.tax_amount,"account_head":d.account_head.replace(doc.branch,doc.abbr),"cost_center":d.cost_center.replace(doc.branch,doc.abbr)}
+			taxes.append(tax_li)
+
+		sales_order = frappe.get_doc({
+		"doctype": "Sales Order",
+		"customer": doc.company,
+		"company": doc.supplier,
+		"set_warehouse": warehouse[0][0],
+		"transaction_date": doc.transaction_date,
+		"inter_company_order_reference": doc.name,
+		"delivery_date": doc.schedule_date,
+		"tax_category" : doc.tax_category.replace(doc.branch,doc.abbr),
+		"items": items,
+		"taxes": taxes
+		})
+		sales_order.insert(ignore_permissions=True,ignore_mandatory = True)
+		sales_order.save()
+		frappe.msgprint("Inter Company Sales Order Genrated")
+
+
+@frappe.whitelist()
+def insertPI(doc,method):
+	if doc.is_branch_transfer:
+		warehouse = frappe.db.sql("""select name from `tabWarehouse` where company = '{0}' and warehouse_name LIKE '%Fresh%'
+				;""".format(doc.customer),as_list=1)
+
+		items = []
+		for i in doc.items:
+			item_li = {"item_code": i.item_code,"item_name": i.item_name,"description": i.item_name,"qty": i.qty,"uom": i.uom,"rate": i.rate,"item_tax_template":i.item_tax_template.replace(doc.branch,doc.abbr),"serial_no":i.serial_no}
+			items.append(item_li)
+		taxes = []
+		for d in doc.taxes:
+			tax_li = {"charge_type": d.charge_type,"description":d.account_head.replace(doc.branch,doc.abbr),"rate": d.rate,"tax_amount": d.tax_amount,"account_head":d.account_head.replace(doc.branch,doc.abbr),"cost_center":d.cost_center.replace(doc.branch,doc.abbr)}
+			taxes.append(tax_li)
+
+		purchase_invoice = frappe.get_doc({
+		"doctype": "Purchase Invoice",
+		"supplier": doc.company,
+		"company": doc.customer,
+		"update_stock": doc.update_stock,
+		"set_warehouse": warehouse[0][0],
+		"posting_date": doc.posting_date,
+		"inter_company_invoice_reference": doc.name,
+		"due_date": doc.due_date,
+		"tax_category" : doc.tax_category.replace(doc.branch,doc.abbr),
+		"items": items,
+		"taxes": taxes
+		})
+		purchase_invoice.insert(ignore_permissions=True,ignore_mandatory = True)
+		purchase_invoice.save()
+		frappe.msgprint("Inter Company Purchase Invoice Genrated")
+
+
+@frappe.whitelist(allow_guest=True)
+def createSupplier(doc,method):
+	if doc.has_double_ledger and not frappe.db.exists("Supplier", doc.customer_name):
+		spl = frappe.get_doc({
+		"doctype": "Supplier",
+		"supplier_name": doc.customer_name,
+		"supplier_group": doc.supplier_group,
+		"branch": doc.branch,
+		"territory": doc.territory
+		})
+		spl.insert(ignore_mandatory = True,ignore_permissions=True)
+
+		dbl = frappe.get_doc({
+		"doctype": "Double Ledger Parties",
+		"primary_role": "Customer",
+		"customer": doc.customer_name,
+		"supplier": doc.customer_name
+		})
+		dbl.insert(ignore_mandatory = True,ignore_permissions=True)
+		frappe.msgprint("Double Ledger Party Created")
+
+
+@frappe.whitelist(allow_guest=True)
+def createCustomer(doc,method):
+	if doc.has_double_ledger and not frappe.db.exists("Customer", doc.supplier_name):
+		cus = frappe.get_doc({
+		"doctype": "Customer",
+		"customer_name": doc.supplier_name,
+		"customer_group": doc.customer_group,
+		"branch": doc.branch,
+		"territory": doc.territory
+		})
+		cus.insert(ignore_mandatory = True,ignore_permissions=True)
+
+		dbl = frappe.get_doc({
+		"doctype": "Double Ledger Parties",
+		"primary_role": "Supplier",
+		"customer": doc.supplier_name,
+		"supplier": doc.supplier_name
+		})
+		dbl.insert(ignore_mandatory = True,ignore_permissions=True)
+		frappe.msgprint("Double Ledger Party Created")
+
+
+@frappe.whitelist()
+def insertDN(doc,method):
+	if doc.is_replacement:
+		warehouse = frappe.db.sql("""select name from `tabWarehouse` where company = '{0}' and warehouse_name LIKE '%Fresh%'
+				;""".format(doc.company),as_list=1)
+
+		items = []
+		for i in doc.items:
+			item_li = {"item_code": i.item_code,"item_name": i.item_name,"description": i.item_name,"qty": i.qty,"uom": i.uom,"rate": i.rate,"item_tax_template":i.item_tax_template,"return_serial_no":i.serial_no}
+			items.append(item_li)
+		taxes = []
+#		for d in doc.taxes:
+#			tax_li = {"charge_type": d.charge_type,"description":d.account_head.replace(doc.branch,doc.abbr),"rate": d.rate,"tax_amount": d.tax_amount,"account_head":d.account_head.replace(doc.branch,doc.abbr),"cost_center":d.cost_center.replace(doc.branch,doc.abbr)}
+#			taxes.append(tax_li)
+
+		delivery_note = frappe.get_doc({
+		"doctype": "Delivery Note",
+		"branch": doc.branch,
+		"company": doc.company,
+		"customer": doc.supplier,
+		"set_warehouse": warehouse[0][0],
+		"posting_date": doc.posting_date,
+		"replacement_against": doc.name,
+		"tax_category" : doc.tax_category,
+		"items": items,
+		"taxes": doc.taxes
+		})
+		delivery_note.insert(ignore_permissions=True,ignore_mandatory = True)
+		delivery_note.save()
+		frappe.msgprint("Delivery Note Created For Replacement")
+
+
+@frappe.whitelist()
+def insertPrice(self,method):
+	for d in self.items:
+		item_price = frappe.db.sql("""select name from `tabItem Price` where item_code = %s and price_list = %s 
+		and valid_from = %s;""",(d.item_code,self.buying_price_list,self.posting_date))
+		if item_price:
+			ip = frappe.get_doc("Item Price",item_price[0][0])
+			ip.price_list_rate = d.rate
+			ip.save()
+
+		if not item_price:
+			doc = frappe.get_doc(dict(
+			doctype = "Item Price",
+			item_code = d.item_code,
+			buying = 1,
+			price_list = self.buying_price_list,
+			price_list_rate = d.rate,
+			valid_from = self.posting_date
+			)).insert(ignore_permissions = True,ignore_mandatory = True)
+			doc.save()
+
+@frappe.whitelist(allow_guest=True)
+def createPIG(doc,method):
+	if doc.name not in frappe.get_list('Parent Item Group', filters={'docstatus': 0}, fields=['name']) and doc.is_group:
+		cus = frappe.get_doc({
+		"doctype": "Parent Item Group",
+		"parent_item_group": doc.item_group_name
+		})
+		cus.insert(ignore_mandatory = True,ignore_permissions=True)
+
+@frappe.whitelist(allow_guest=True)
+def getContact(supplier):
+	data = frappe.db.sql("""select c.mobile_no,c.email_id from `tabContact` c, 
+				`tabDynamic Link` dl
+				where c.name = dl.parent and dl.link_name = %s;""",(supplier),as_list=1)
+	return data
+
+
+@frappe.whitelist()
+def getCustomerItemCode(item,customer):
+	customer_item_code = frappe.db.sql("""select ref_code from `tabItem Customer Detail` where parent = %s 
+		and customer_name = %s;""",(item,customer),as_list = True)
+	if customer_item_code:
+		return customer_item_code
+	else:
+		""
+
+@frappe.whitelist()
+def getDepartment(user):
+	department = frappe.db.sql("""select department from `tabEmployee` where prefered_email = %s;""",(user),as_list = True)
+	if department:
+		return department
+	else:
+		""
+
+@frappe.whitelist()
+def getJOBcheck(wo):
+	jc = frappe.db.sql("""select IF((SELECT count(name) from `tabJob Card` where docstatus = 0 and 
+		work_order = %s),1,0);""",(wo),as_list = True)
+	return jc
+
+
+@frappe.whitelist()
+def getStock(warehouse,item):
+	stock = frappe.db.sql("""select projected_qty,actual_qty from `tabBin` where warehouse = %s 
+		and item_code = %s;""",(warehouse,item),as_list = True)
+	if stock:
+		return stock
+	else:
+		0
+
+
+@frappe.whitelist()
+def createPurchaseMR(wo):
+	worder = frappe.get_doc('Work Order', wo)
+	items = []
+	for d in worder.required_items:
+		purchase = frappe.get_doc('Item', d.item_code)
+		if purchase.is_only_purchase_for_manufacturing == 1:
+			if d.required_qty > d.available_qty_at_source_warehouse:
+				item_li = {"item_code": d.item_code,"qty": d.required_qty - d.available_qty_at_source_warehouse,"warehouse": d.source_warehouse,"schedule_date": datetime.today() + timedelta(days=1)}
+				items.append(item_li)
+	if items:
+		mr = frappe.get_doc({
+		"doctype": "Material Request",
+		"company": worder.company,
+		"set_warehouse": worder.source_warehouse,
+		"type": "Purchase",
+		"material_request_type": "Purchase",
+		"schedule_date": worder.expected_delivery_date,
+		"items": items
+		})
+		mr.insert(ignore_permissions=True)
+		mr.save()
+		msgprint("Material Request Generated (Purchase)")
+
+	else:
+		msgprint("No Items Found For Purchase Request")
+
+@frappe.whitelist()
+def createManufactureMR(wo):
+	worder = frappe.get_doc('Work Order', wo)
+	items = []
+	for d in worder.required_items:
+		purchase = frappe.get_doc('Item', d.item_code)
+		if purchase.in_house_manufacturing == 1:
+			if d.required_qty > d.available_qty_at_source_warehouse:
+				item_li = {"item_code": d.item_code,"qty": d.required_qty - d.available_qty_at_source_warehouse,"warehouse": d.source_warehouse,"schedule_date": datetime.today() + timedelta(days=1)}
+				items.append(item_li)
+	if items:
+		mr = frappe.get_doc({
+		"doctype": "Material Request",
+		"company": worder.company,
+		"set_warehouse": worder.source_warehouse,
+		"type": "Manufacture",
+		"material_request_type": "Manufacture",
+		"schedule_date": worder.expected_delivery_date,
+		"items": items
+		})
+		mr.insert(ignore_permissions=True)
+		mr.save()
+		msgprint("Material Request Generated (Manufacture)")
+
+	else:
+		msgprint("No Items Found For Manufacture Request")
+
+
+@frappe.whitelist()
+def getConversion(item,uom):
+	conversion = frappe.db.sql("""select conversion_factor from `tabUOM Conversion Detail` where 
+			parent = %s and uom = %s;""",(item,uom),as_list = True)
+	return conversion if conversion else 0
+
+@frappe.whitelist()
+def getBankAccount(company,bank_account):
+	bank_account = frappe.db.sql("""select account from `tabBank Account Mapping` where company = %s 
+			and parent = %s;""",(company,bank_account),as_list = True)
+	return bank_account if bank_account else ""
