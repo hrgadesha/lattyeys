@@ -1,0 +1,28 @@
+{
+ "creation": "2021-02-20 14:07:02.489439",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "contact_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Number"
+  }
+ ],
+ "istable": 1,
+ "modified": "2021-02-20 14:07:02.489439",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "PO SMS Contact Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

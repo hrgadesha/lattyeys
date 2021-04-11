@@ -174,6 +174,7 @@ def insertSO(doc,method):
 		"doctype": "Sales Order",
 		"customer": doc.company,
 		"company": doc.supplier,
+		"branch": doc.abbr,
 		"set_warehouse": warehouse[0][0],
 		"transaction_date": doc.transaction_date,
 		"inter_company_order_reference": doc.name,
@@ -206,6 +207,7 @@ def insertPI(doc,method):
 		"doctype": "Purchase Invoice",
 		"supplier": doc.company,
 		"company": doc.customer,
+		"branch": doc.abbr,
 		"update_stock": doc.update_stock,
 		"set_warehouse": warehouse[0][0],
 		"posting_date": doc.posting_date,
@@ -375,8 +377,8 @@ def createPurchaseMR(wo):
 	for d in worder.required_items:
 		purchase = frappe.get_doc('Item', d.item_code)
 		if purchase.is_only_purchase_for_manufacturing == 1:
-			if d.required_qty > d.available_qty_at_source_warehouse:
-				item_li = {"item_code": d.item_code,"qty": d.required_qty - d.available_qty_at_source_warehouse,"warehouse": d.source_warehouse,"schedule_date": datetime.today() + timedelta(days=1)}
+			if d.required_qty > frappe.db.get_value("Bin", filters={'item_code':d.item_code,'warehouse':d.source_warehouse},fieldname=['projected_qty']):
+				item_li = {"item_code": d.item_code,"qty": d.required_qty - frappe.db.get_value("Bin", filters={'item_code':d.item_code,'warehouse':d.source_warehouse},fieldname=['projected_qty']),"warehouse": d.source_warehouse,"schedule_date": datetime.today() + timedelta(days=1)}
 				items.append(item_li)
 	if items:
 		mr = frappe.get_doc({
@@ -384,6 +386,7 @@ def createPurchaseMR(wo):
 		"company": worder.company,
 		"set_warehouse": worder.source_warehouse,
 		"type": "Purchase",
+		"priority": "High",
 		"material_request_type": "Purchase",
 		"schedule_date": worder.expected_delivery_date,
 		"items": items
@@ -402,8 +405,8 @@ def createManufactureMR(wo):
 	for d in worder.required_items:
 		purchase = frappe.get_doc('Item', d.item_code)
 		if purchase.in_house_manufacturing == 1:
-			if d.required_qty > d.available_qty_at_source_warehouse:
-				item_li = {"item_code": d.item_code,"qty": d.required_qty - d.available_qty_at_source_warehouse,"warehouse": d.source_warehouse,"schedule_date": datetime.today() + timedelta(days=1)}
+			if d.required_qty > frappe.db.get_value("Bin", filters={'item_code':d.item_code,'warehouse':d.source_warehouse},fieldname=['projected_qty']):
+				item_li = {"item_code": d.item_code,"qty": d.required_qty - frappe.db.get_value("Bin", filters={'item_code':d.item_code,'warehouse':d.source_warehouse},fieldname=['projected_qty']),"warehouse": d.source_warehouse,"schedule_date": datetime.today() + timedelta(days=1)}
 				items.append(item_li)
 	if items:
 		mr = frappe.get_doc({
@@ -411,6 +414,7 @@ def createManufactureMR(wo):
 		"company": worder.company,
 		"set_warehouse": worder.source_warehouse,
 		"type": "Manufacture",
+		"priority": "High",
 		"material_request_type": "Manufacture",
 		"schedule_date": worder.expected_delivery_date,
 		"items": items
@@ -434,3 +438,16 @@ def getBankAccount(company,bank_account):
 	bank_account = frappe.db.sql("""select account from `tabBank Account Mapping` where company = %s 
 			and parent = %s;""",(company,bank_account),as_list = True)
 	return bank_account if bank_account else ""
+
+
+@frappe.whitelist()
+def getDefaultSupplier(item):
+	vendor = frappe.db.sql("""select default_supplier from `tabItem Default` where parent = %s;""",(item),as_list = True)
+	return vendor if vendor else "NA"
+
+
+@frappe.whitelist(allow_guest=True)
+def getBinStock(item,warehouse):
+	stock = frappe.db.sql("""select actual_qty from `tabBin` where item_code = %s and 
+		warehouse = %s;""",(item,warehouse),as_list = True)
+	return stock if stock else 0

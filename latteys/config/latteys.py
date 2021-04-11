@@ -26,6 +26,41 @@ def get_data():
                                         "label": "Competitor Company",
                                         "description": _("Competitor Company"),
                                         "onboard": 1
+                                },
+				{
+                                        "type": "doctype",
+                                        "name": "Warehouse Bin",
+                                        "label": "Warehouse Bin",
+                                        "description": _("Warehouse Bin"),
+                                        "onboard": 1
+                                },
+				{
+                                        "type": "doctype",
+                                        "name": "Bin Category",
+                                        "label": "Bin Category",
+                                        "description": _("Bin Category"),
+                                        "onboard": 1
+                                },
+				{
+                                        "type": "doctype",
+                                        "name": "Bin Bulk Printing",
+                                        "label": "Bin Bulk Printing",
+                                        "description": _("Bin Bulk Printing"),
+                                        "onboard": 1
+                                },
+				{
+                                        "type": "doctype",
+                                        "name": "Operation Class",
+                                        "label": "Operation Class",
+                                        "description": _("Operation Class"),
+                                        "onboard": 1
+                                },
+				{
+                                        "type": "doctype",
+                                        "name": "Voucher SMS Setting",
+                                        "label": "Voucher SMS Setting",
+                                        "description": _("Voucher SMS Setting"),
+                                        "onboard": 1
                                 }
                         ]
                 },

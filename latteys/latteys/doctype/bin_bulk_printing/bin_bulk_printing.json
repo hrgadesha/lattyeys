@@ -1,0 +1,41 @@
+{
+ "autoname": "PRINT/.#",
+ "creation": "2021-02-09 15:58:24.238283",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "bin_bulk_printing_table"
+ ],
+ "fields": [
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "bin_bulk_printing_table",
+   "fieldtype": "Table",
+   "label": "Bin Bulk Printing Table",
+   "options": "Bin Bulk Printing Table"
+  }
+ ],
+ "modified": "2021-02-09 15:58:46.164009",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Bin Bulk Printing",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
