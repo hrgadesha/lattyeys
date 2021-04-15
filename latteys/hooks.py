@@ -162,5 +162,3 @@ doc_events = {
 # override_doctype_dashboards = {
 # 	"Task": "latteys.task.get_dashboard_data"
 # }
-
-fixtures = ["Custom Field","Role","Property Setter"]
