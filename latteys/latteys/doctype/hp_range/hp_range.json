@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:hp_range",
+ "creation": "2021-05-10 14:58:59.879066",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "hp_range"
+ ],
+ "fields": [
+  {
+   "fieldname": "hp_range",
+   "fieldtype": "Data",
+   "label": "HP Range",
+   "unique": 1
+  }
+ ],
+ "links": [],
+ "modified": "2021-05-10 20:27:20.098862",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "HP Range",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

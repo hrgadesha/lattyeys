@@ -196,7 +196,7 @@ def insertPI(doc,method):
 
 		items = []
 		for i in doc.items:
-			item_li = {"item_code": i.item_code,"item_name": i.item_name,"description": i.item_name,"qty": i.qty,"uom": i.uom,"rate": i.rate,"item_tax_template":i.item_tax_template.replace(doc.branch,doc.abbr),"serial_no":i.serial_no}
+			item_li = {"item_code": i.item_code,"item_name": i.item_name,"description": i.item_name,"qty": i.qty,"uom": i.uom,"rate": i.rate,"item_tax_template":i.item_tax_template.replace(doc.branch,doc.abbr),"serial_no":i.serial_no,"cost_center": frappe.db.get_value('Company', {'name': doc.customer}, ['cost_center']),}
 			items.append(item_li)
 		taxes = []
 		for d in doc.taxes:
@@ -214,6 +214,7 @@ def insertPI(doc,method):
 		"inter_company_invoice_reference": doc.name,
 		"due_date": doc.due_date,
 		"tax_category" : doc.tax_category.replace(doc.branch,doc.abbr),
+		"cost_center": frappe.db.get_value('Company', {'name': doc.customer}, ['cost_center']),
 		"items": items,
 		"taxes": taxes
 		})
@@ -321,7 +322,7 @@ def insertPrice(self,method):
 
 @frappe.whitelist(allow_guest=True)
 def createPIG(doc,method):
-	if doc.name not in frappe.get_list('Parent Item Group', filters={'docstatus': 0}, fields=['name']) and doc.is_group:
+	if not frappe.db.exists('Parent Item Group', doc.name) and doc.is_group == 1:
 		cus = frappe.get_doc({
 		"doctype": "Parent Item Group",
 		"parent_item_group": doc.item_group_name

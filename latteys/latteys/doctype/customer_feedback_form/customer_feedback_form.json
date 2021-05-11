@@ -1,0 +1,119 @@
+{
+ "actions": [],
+ "autoname": "FB/.###",
+ "creation": "2021-04-29 22:13:52.792840",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "lil_ratings_section",
+  "product_range",
+  "product_quality",
+  "delivery_time",
+  "product_price",
+  "product_service",
+  "brand_awareness",
+  "marketing_executive_ratings_section",
+  "product_knowledge",
+  "timely_communication",
+  "marketing_effectiveness",
+  "section_break_12",
+  "overall_lil_ratings",
+  "feedbacks"
+ ],
+ "fields": [
+  {
+   "fieldname": "lil_ratings_section",
+   "fieldtype": "Section Break",
+   "label": "Rate LIL from 1 to 5 on the following parameters 1 being Poor and 5 being excellent"
+  },
+  {
+   "fieldname": "product_range",
+   "fieldtype": "Rating",
+   "label": "Product Range"
+  },
+  {
+   "fieldname": "product_quality",
+   "fieldtype": "Rating",
+   "label": "Product Quality"
+  },
+  {
+   "fieldname": "delivery_time",
+   "fieldtype": "Rating",
+   "label": "Delivery Time"
+  },
+  {
+   "fieldname": "product_price",
+   "fieldtype": "Rating",
+   "label": "Product Price"
+  },
+  {
+   "fieldname": "product_service",
+   "fieldtype": "Rating",
+   "label": "Product Service"
+  },
+  {
+   "fieldname": "brand_awareness",
+   "fieldtype": "Rating",
+   "label": "Brand Awareness"
+  },
+  {
+   "fieldname": "marketing_executive_ratings_section",
+   "fieldtype": "Section Break",
+   "label": "Rate the Marketing Executive on the following"
+  },
+  {
+   "fieldname": "product_knowledge",
+   "fieldtype": "Rating",
+   "label": "Product knowledge"
+  },
+  {
+   "fieldname": "timely_communication",
+   "fieldtype": "Rating",
+   "label": "Timely Communication"
+  },
+  {
+   "fieldname": "marketing_effectiveness",
+   "fieldtype": "Rating",
+   "label": "Marketing Effectiveness"
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "overall_lil_ratings",
+   "fieldtype": "Rating",
+   "label": "What would be the overall rating of Latteys when compared with the competition"
+  },
+  {
+   "fieldname": "feedbacks",
+   "fieldtype": "Small Text",
+   "label": "Any suggestions/feedback that would help Latteys improve"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-04-29 22:20:06.805747",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Customer Feedback Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

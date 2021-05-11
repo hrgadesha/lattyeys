@@ -1,0 +1,339 @@
+{
+ "actions": [],
+ "autoname": "REG-.###",
+ "creation": "2021-04-29 19:43:38.908217",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "register_as",
+  "type",
+  "full_name",
+  "customer_group",
+  "supplier_group",
+  "column_break_6",
+  "gst_category",
+  "gstin",
+  "pan_no",
+  "address_details_section",
+  "address_line1",
+  "address_line2",
+  "city_town",
+  "state",
+  "country",
+  "postal_code",
+  "column_break_17",
+  "email_address",
+  "phone_number",
+  "mobile_number",
+  "contact_details_section",
+  "contact_person_name",
+  "gender",
+  "column_break_24",
+  "primary_email_id",
+  "primary_mobile_number",
+  "primary_whatsapp_number",
+  "bank_details_section",
+  "bank_name",
+  "branch_name",
+  "column_break_31",
+  "bank_account_no",
+  "bank_isfc_code",
+  "product_details_section",
+  "item_manufactured",
+  "total_monthly_unit_production",
+  "lead_time",
+  "column_break_38",
+  "annual_turnover",
+  "file_and_documents_attachments_section",
+  "gst_certificate",
+  "udyog_aadhard_upload",
+  "business",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "register_as",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Register As",
+   "options": "\nCustomer\nSupplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nCompany\nIndividual",
+   "reqd": 1
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name (Company / Person)",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.register_as == \"Customer\"",
+   "fieldname": "customer_group",
+   "fieldtype": "Link",
+   "label": "Customer Group",
+   "options": "Customer Group"
+  },
+  {
+   "depends_on": "eval:doc.register_as == \"Supplier\"",
+   "fieldname": "supplier_group",
+   "fieldtype": "Link",
+   "label": "Supplier Group",
+   "options": "Supplier Group"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gst_category",
+   "fieldtype": "Select",
+   "label": "GST Category",
+   "options": "\nUnregistered\nRegistered Regular\nRegistered Composition\nSEZ\nOverseas\nConsumer\nDeemed Export\nUIN Holders",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN",
+   "mandatory_depends_on": "eval:doc.gst_category == 'Registered Regular' || doc.gst_category == 'Registered Composition'"
+  },
+  {
+   "fieldname": "pan_no",
+   "fieldtype": "Data",
+   "label": "PAN No"
+  },
+  {
+   "fieldname": "address_details_section",
+   "fieldtype": "Section Break",
+   "label": "Address Details"
+  },
+  {
+   "fieldname": "address_line1",
+   "fieldtype": "Data",
+   "label": "Address Line1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address_line2",
+   "fieldtype": "Data",
+   "label": "Address Line2"
+  },
+  {
+   "fieldname": "city_town",
+   "fieldtype": "Data",
+   "label": "City Town",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "\nAndaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLakshadweep Islands\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nOther Territory\nPondicherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal",
+   "reqd": 1
+  },
+  {
+   "default": "India",
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "Postal Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email_address",
+   "fieldtype": "Data",
+   "label": "Email Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "contact_person_name",
+   "fieldtype": "Data",
+   "label": "Contact Person Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "primary_email_id",
+   "fieldtype": "Data",
+   "label": "Primary Email ID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "primary_mobile_number",
+   "fieldtype": "Data",
+   "label": "Primary Mobile Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "primary_whatsapp_number",
+   "fieldtype": "Data",
+   "label": "Primary Whatsapp Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_details_section",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Name",
+   "options": "Bank",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Bank Account No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_isfc_code",
+   "fieldtype": "Data",
+   "label": "Bank ISFC Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "product_details_section",
+   "fieldtype": "Section Break",
+   "label": "Product Details"
+  },
+  {
+   "fieldname": "item_manufactured",
+   "fieldtype": "Table MultiSelect",
+   "label": "Item Manufactured",
+   "options": "Item Group MultiSelect"
+  },
+  {
+   "fieldname": "total_monthly_unit_production",
+   "fieldtype": "Int",
+   "label": "Total Monthly Unit Production"
+  },
+  {
+   "fieldname": "lead_time",
+   "fieldtype": "Int",
+   "label": "Lead Time (Days)"
+  },
+  {
+   "fieldname": "column_break_38",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "annual_turnover",
+   "fieldtype": "Currency",
+   "label": "Annual Turnover (Cr)"
+  },
+  {
+   "fieldname": "file_and_documents_attachments_section",
+   "fieldtype": "Section Break",
+   "label": "File and Documents Attachments"
+  },
+  {
+   "fieldname": "gst_certificate",
+   "fieldtype": "Attach",
+   "label": "GST Certificate",
+   "mandatory_depends_on": "eval:doc.gst_category == 'Registered Regular' || doc.gst_category == 'Registered Composition'"
+  },
+  {
+   "fieldname": "udyog_aadhard_upload",
+   "fieldtype": "Attach",
+   "label": "Udyog Aadhard",
+   "reqd": 1
+  },
+  {
+   "fieldname": "business",
+   "fieldtype": "Attach",
+   "label": "Business Card / Business Profile"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Registration Form",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-04-29 21:39:34.492579",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Registration Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
