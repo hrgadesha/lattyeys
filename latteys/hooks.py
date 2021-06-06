@@ -79,10 +79,12 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
+
 doc_events = {
-# 	"Stock Entry": {
- #		"on_submit": "latteys.latteys.doctype.replaced_qty.updateSE"
-#	},
+ 	"Stock Entry": {
+		"on_submit": "latteys.latteys.doctype.replaced_qty.updateSE",
+		"on_cancel": "latteys.latteys.doctype.replaced_qty.cancelSE"
+	},
         "Sales Invoice": {
                 "on_submit": "latteys.latteys.doctype.replaced_qty.insertPI"
         },
@@ -106,6 +108,9 @@ doc_events = {
         },
 	"Purchase Invoice": {
                 "on_submit": "latteys.latteys.doctype.replaced_qty.insertPrice",
+        },
+	"Item Group": {
+                "validate": "latteys.latteys.doctype.replaced_qty.updateWebContent_InItem",
         }
 #,
 #	"Project": {

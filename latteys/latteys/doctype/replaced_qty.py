@@ -10,11 +10,19 @@ from frappe.model.document import Document
 
 @frappe.whitelist(allow_guest=True)
 def updateSE(doc,method):
-	if doc.stock_entry_type == "Material Issue" and doc.replacement:
+	if doc.stock_entry_type == "Receive From Job work" and doc.recieve_against_job_work:
 		for d in doc.items:
-			sv = frappe.get_doc("Stock Entry Detail",d.replacement_request_id)
-			sv.replaced_qty = d.qty
+			sv = frappe.get_doc("Stock Entry Detail",d.job_work_id)
+			sv.sent_qty += d.qty
 			sv.save()
+
+@frappe.whitelist(allow_guest=True)
+def cancelSE(doc,method):
+        if doc.stock_entry_type == "Receive From Job work" and doc.recieve_against_job_work:
+                for d in doc.items:
+                        sv = frappe.get_doc("Stock Entry Detail",d.job_work_id)
+                        sv.sent_qty -= d.qty
+                        sv.save()
 
 
 @frappe.whitelist(allow_guest=True)
@@ -452,3 +460,17 @@ def getBinStock(item,warehouse):
 	stock = frappe.db.sql("""select actual_qty from `tabBin` where item_code = %s and 
 		warehouse = %s;""",(item,warehouse),as_list = True)
 	return stock if stock else 0
+
+
+@frappe.whitelist(allow_guest=True)
+def updateWebContent_InItem(doc,method):
+	if doc.show_in_website == 1:
+		count_item = 0
+		for d in frappe.db.get_list('Item',filters={"item_group": doc.name,'show_in_website': 1,"update_website_content_based_on_item_group":1,"update_website_label_dynamically":1},fields=['name']):
+			count_item = count_item + 1
+			item = frappe.get_doc("Item",d.name)
+			item.web_long_description = doc.description
+			item.web_content_description = doc.web_content_description
+			item.website_content = doc.website_content
+			item.save()
+		frappe.msgprint(str(count_item) + " Item Updated")

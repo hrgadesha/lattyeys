@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2021-05-06 20:22:56.060966",
+ "modified": "2021-05-22 20:40:58.835375",
  "modified_by": "Administrator",
  "module": "Latteys",
  "name": "Consolidated Accounts Receivable",
@@ -18,7 +18,7 @@
  "query": "",
  "ref_doctype": "Sales Invoice",
  "report_name": "Consolidated Accounts Receivable",
- "report_type": "Script Report",
+ "report_type": "Query Report",
  "roles": [
   {
    "role": "Accounts User"

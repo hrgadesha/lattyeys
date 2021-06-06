@@ -6,6 +6,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "customer",
+  "type",
   "lil_ratings_section",
   "product_range",
   "product_quality",
@@ -90,16 +92,43 @@
    "fieldname": "feedbacks",
    "fieldtype": "Small Text",
    "label": "Any suggestions/feedback that would help Latteys improve"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nSales\nMarketing\nService",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-04-29 22:20:06.805747",
+ "modified": "2021-05-28 13:31:21.179506",
  "modified_by": "Administrator",
  "module": "Latteys",
  "name": "Customer Feedback Form",
  "owner": "Administrator",
  "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Customer",
+   "share": 1,
+   "write": 1
+  },
   {
    "create": 1,
    "delete": 1,

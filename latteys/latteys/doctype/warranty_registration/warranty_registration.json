@@ -1,0 +1,149 @@
+{
+ "actions": [],
+ "autoname": "WR-.#",
+ "creation": "2021-05-15 23:00:59.950201",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "serial_no",
+  "serial_no_master",
+  "item_code",
+  "item_name",
+  "warranty_days",
+  "warranty_ends_on",
+  "column_break_5",
+  "registration_date",
+  "full_name",
+  "contact_no",
+  "territory",
+  "status",
+  "registration_status",
+  "attach_copy",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_no_master",
+   "fieldtype": "Link",
+   "label": "Serial No Master",
+   "options": "Serial No"
+  },
+  {
+   "fetch_from": "serial_no_master.item_code",
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "registration_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Registration Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Warranty Registration",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "attach_copy",
+   "fieldtype": "Attach",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "warranty_days",
+   "fieldtype": "Int",
+   "label": "Warranty Days"
+  },
+  {
+   "fieldname": "warranty_ends_on",
+   "fieldtype": "Date",
+   "label": "Warranty Ends On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nVerified\nUnverified"
+  },
+  {
+   "fieldname": "registration_status",
+   "fieldtype": "Select",
+   "label": "Registration Status",
+   "mandatory_depends_on": "eval:doc.docstatus == 0",
+   "options": "\nApprove\nReject"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-05-26 22:49:03.430471",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Warranty Registration",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
