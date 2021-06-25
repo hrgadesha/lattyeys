@@ -20,8 +20,8 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 3,
- "modified": "2021-04-26 17:44:01.276013",
- "modified_by": "Administrator",
+ "modified": "2021-06-16 15:07:17.726693",
+ "modified_by": "ayush@latteysindustries.com",
  "module": "Latteys",
  "name": "recruitment",
  "owner": "Administrator",
@@ -64,6 +64,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "description": "<p style=\"color: Tomato;\"><b>Please Add Number With Country Code (91) For India</b></p>",
    "fieldname": "phone_number",
    "fieldtype": "Data",
    "hidden": 0,
@@ -145,7 +146,7 @@
    "label": "Job Division",
    "max_length": 0,
    "max_value": 0,
-   "options": "Accounting\nCompany Secretary\nCRM\nHR/Administration\nLogistics\nOthers\nProduction\nPurchase\nPR\nQuality Control\nSales - Frontend\nSales Back Office",
+   "options": "Accounting\nCompany Secretary\nCRM\nHR/Administration\nLogistics\nOthers\nProduction\nPurchase\nPR\nQuality Control\nSales - Frontend\nSales Back Office\nService\nMarketing/PR\n",
    "read_only": 0,
    "reqd": 1,
    "show_in_filter": 0
