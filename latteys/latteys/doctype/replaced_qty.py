@@ -472,5 +472,17 @@ def updateWebContent_InItem(doc,method):
 			item.web_long_description = doc.description
 			item.web_content_description = doc.web_content_description
 			item.website_content = doc.website_content
+			item.default_material_request_type = doc.default_material_request_type
 			item.save()
 		frappe.msgprint(str(count_item) + " Item Updated")
+
+
+@frappe.whitelist(allow_guest=True)
+def updateMRtype_InItem(doc,method):
+	count_item = 0
+	for d in frappe.db.get_list('Item',filters={"item_group": doc.name},fields=['name']):
+		count_item = count_item + 1
+		item = frappe.get_doc("Item",d.name)
+		item.default_material_request_type = doc.default_material_request_type
+		item.save()
+	frappe.msgprint(str(count_item) + " Item Updated")

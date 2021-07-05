@@ -110,7 +110,8 @@ doc_events = {
                 "on_submit": "latteys.latteys.doctype.replaced_qty.insertPrice",
         },
 	"Item Group": {
-                "validate": "latteys.latteys.doctype.replaced_qty.updateWebContent_InItem",
+                "validate": ["latteys.latteys.doctype.replaced_qty.updateWebContent_InItem",
+			"latteys.latteys.doctype.replaced_qty.updateWebContent_InItem.updateMRtype_InItem"]
         }
 #,
 #	"Project": {

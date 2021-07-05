@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "autoname": "field:discharge_flow",
+ "creation": "2021-06-28 18:30:30.761544",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "discharge_flow",
+  "range_value_section",
+  "min",
+  "column_break_4",
+  "max"
+ ],
+ "fields": [
+  {
+   "fieldname": "discharge_flow",
+   "fieldtype": "Data",
+   "label": "Discharge Flow",
+   "unique": 1
+  },
+  {
+   "fieldname": "range_value_section",
+   "fieldtype": "Section Break",
+   "label": "Range Value"
+  },
+  {
+   "fieldname": "min",
+   "fieldtype": "Float",
+   "label": "Min"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "max",
+   "fieldtype": "Float",
+   "label": "Max"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-06-28 18:30:38.667934",
+ "modified_by": "Administrator",
+ "module": "Latteys",
+ "name": "Discharge Flow",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
